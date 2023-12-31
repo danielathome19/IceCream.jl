@@ -1,4 +1,3 @@
-# Import Julia packages that provide similar functionality to Python's imports
 module IceCream
 # import Pkg; Pkg.add("Printf"); Pkg.add("Dates"); Pkg.add("Logging"); Pkg.add("Crayons")
 using Printf
@@ -25,9 +24,8 @@ function ic_configure(; new_prefix=DEFAULT_PREFIX, enabled=true, include_context
                       include_absolute_path=false, include_methodname=true, 
                       include_line_number=true, color=true)
     ICE_CREAM_ENABLED[] = enabled
-    CONTEXT_INFO[] = (include_context=include_context, include_filename=include_filename, 
-                      include_classname=include_classname, include_absolute_path=include_absolute_path, 
-                      include_methodname=include_methodname, include_line_number=include_line_number)
+    CONTEXT_INFO[] = (include_context, include_filename, include_classname, 
+                      include_absolute_path, include_methodname, include_line_number)
     color_output[] = color
     if !include_context && (include_filename || include_classname || include_absolute_path || 
                             include_methodname || include_line_number)
