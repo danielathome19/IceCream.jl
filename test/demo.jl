@@ -16,9 +16,9 @@ IceCream.ic_enable()
 
 function test()
     IceCream.ic_configure_color("green")
-    # IceCream.ic_configure_single(IceCream.include_datetime, true)
-    @ic :test x y
-    # IceCream.ic_configure_single(IceCream.include_datetime, false)
+    IceCream.ic_configure_single(IceCream.include_datetime, true)
+    @ic :test x y  # Have to manually pass the function name as a symbol
+    IceCream.ic_configure_single(IceCream.include_datetime, false)
 end
 
 IceCream.ic_configure(include_context=true, include_datetime=false, include_filename=true, 

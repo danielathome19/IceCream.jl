@@ -51,21 +51,11 @@ end
 # Configuration function to set various options using enum
 function ic_configure_single(config::Configs, value)
     current_context = CONTEXT_INFO[]
-    for field_name in fieldnames(typeof(current_context))
-        if string(field_name) == string(config)
-            new_context = []
-            for field_name in fieldnames(typeof(current_context))
-                if string(field_name) == string(config)
-                    push!(new_context, value)
-                else
-                    push!(new_context, getfield(current_context, field_name))
-                end
-            end
-            # TODO: Turn new_context into a Ref((...)) object
-            CONTEXT_INFO[] = new_context
-            break
-        end
-    end
+    config_str = string(config)
+    new_context_values = [(string(name) == config_str ? value : getfield(current_context, name))
+                          for name in fieldnames(typeof(current_context))]
+    new_context = NamedTuple{fieldnames(typeof(current_context))}(new_context_values)
+    CONTEXT_INFO[] = new_context
 end
 
 function ic_configure_color(color)
@@ -105,7 +95,6 @@ macro ic(exprs...)
             push!(var_infos.args, Expr(:tuple, var_str, var_value)) # Push the tuple to var_infos
         end
 
-        # The line number where the macro is called
         line_number = __source__.line
         # Have to manually pass in the function name in Julia; original callers do not appear in the stacktrace
         method_name = ""  # TODO: find a workaround or create an issue on JuliaLang
