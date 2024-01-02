@@ -3,6 +3,11 @@ uuid = "029bc01f-a38c-4df2-9931-c297cb6cdd02"
 authors = ["Daniel J. Szelogowski <dan@zerodevelopment.net>"]
 version = "0.1.0"
 
+[compat]
+julia = "1.9"
+Crayons = "4.1.1"
+SHA = "0.7.0"
+
 [deps]
 Crayons = "a8cc5b0e-0ffa-5ad4-8c14-923d3ee1735f"
 Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
