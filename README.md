@@ -1,3 +1,10 @@
+[pkgeval-img]: https://juliaci.github.io/NanosoldierReports/pkgeval_badges/P/IceCream.svg
+[pkgeval-url]: https://juliaci.github.io/NanosoldierReports/pkgeval_badges/report.html
+
+[![][pkgeval-img]][pkgeval-url]
+[![CI/CT/CD](https://github.com/danielathome19/IceCream.jl/actions/workflows/julia_push.yml/badge.svg)](https://github.com/danielathome19/IceCream.jl/actions/workflows/julia_push.yml)
+[![License](https://img.shields.io/github/license/danielathome19/IceCream.jl.svg)](https://github.com/danielathome19/IceCream.jl/blob/master/LICENSE.md)
+
 # IceCream.jl — Never use println() to debug in Julia again.
 
 IceCream.jl is a Julia port of the [icecream](https://github.com/gruns/icecream) library for Python.
