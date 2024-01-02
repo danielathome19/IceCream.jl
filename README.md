@@ -32,9 +32,6 @@ using IceCream
 ```
 
 ## Installation
-
-`TODO: add to Julia package registry`
-
 ```julia
 ] add IceCream
 ```
