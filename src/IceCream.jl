@@ -5,10 +5,8 @@ using Dates
 using Logging
 using Crayons
 
-# Export the macro and configuration functions
 export @ic, @ic_log, ic_configure, ic_configure_color, ic_configure_single, ic_enable, ic_disable, Configs
 
-# Define default configurations using Refs for mutable global state
 const DEFAULT_PREFIX = "ic| "
 const ICE_CREAM_ENABLED = Ref(true)
 const CONTEXT_INFO = Ref((include_context=true, include_datetime=true, include_absolute_path=false,
@@ -18,9 +16,8 @@ const ERROR_CONTEXT_DISABLED = "includeContext needs to be enabled to set this c
 const DEFAULT_COLOR = :cyan
 prefix = Ref(DEFAULT_PREFIX)
 out_color = Ref(DEFAULT_COLOR)
-color_output = Ref(true) # Control color output
+color_output = Ref(true)
 
-# Configuration function to set various options
 function ic_configure(; new_prefix=DEFAULT_PREFIX, enabled=true, include_context=true, 
                       include_datetime=false, include_absolute_path=false, include_filename=true,
                       include_modulename=true, include_methodname=true, 
@@ -48,7 +45,6 @@ function ic_disable()
     ICE_CREAM_ENABLED[] = false
 end
 
-# Configuration function to set various options using enum
 function ic_configure_single(config::Configs, value)
     current_context = CONTEXT_INFO[]
     config_str = string(config)
@@ -66,7 +62,6 @@ function ic_configure_color(color)
     end
 end
 
-# Macro to print (colored) text with a prefix
 macro ic_log(text, colored=true)
     if ICE_CREAM_ENABLED[]
         output = prefix[] * text
@@ -84,15 +79,13 @@ macro ic_log(text, colored=true)
     end
 end
 
-# Macro to capture and print variable names and their values
 macro ic(exprs...)
-    # Only proceed if ICE_CREAM_ENABLED is true
-    if ICE_CREAM_ENABLED[] # Checking if the debugging is enabled
-        var_infos = Expr(:vect) # Container for variable information tuples
+    if ICE_CREAM_ENABLED[]
+        var_infos = Expr(:vect)
         for expr in exprs
             var_str = string(expr) # The variable name as a string
             var_value = esc(expr)  # Capture the expression to be evaluated
-            push!(var_infos.args, Expr(:tuple, var_str, var_value)) # Push the tuple to var_infos
+            push!(var_infos.args, Expr(:tuple, var_str, var_value))
         end
 
         line_number = __source__.line
@@ -106,8 +99,6 @@ macro ic(exprs...)
         file_name_without_path = basename(string(__source__.file))
         absolute_path = abspath(string(__source__.file))
         
-        # Generate the expression for printing with timestamp and line number
-        # Colored output is added if enabled
         return quote
             local output_str = prefix[] * ""
             local timestamp = Dates.format(Dates.now(), "yyyy-mm-dd HH:MM:SS")

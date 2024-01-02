@@ -35,7 +35,7 @@ IceCream.ic_configure_color("blue")
 module TestModule
     push!(LOAD_PATH, "../src")
     include("../src/IceCream.jl")
-    using .IceCream  # Load the IceCream module
+    using .IceCream
     struct TestStruct
         x
         y
