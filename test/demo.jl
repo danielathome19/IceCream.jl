@@ -6,6 +6,9 @@ using .IceCream  # Load the IceCream module
 IceCream.ic_configure(new_prefix="🍦 >", include_color=true)
 IceCream.ic_configure_color("red")
 
+@ic "Hello, world!"
+@ic_log "Hello, world!"
+
 # Example usage
 x = 3
 y = "hello"
